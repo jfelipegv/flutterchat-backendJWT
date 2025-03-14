@@ -20,7 +20,15 @@
         socket.emit('mensaje', { nombre: 'Fernando', id: '123456'});
         socket.on('mensaje', (payload)=>{
             console.log('escuchado ', payload);
-        })
+        });
+
+        socket.on('active-bands', function(bands){
+            console.table(bands)
+        });
+
+        socket.emit('emitir-mensaje', (payload)=>{
+            console.log('emitiendo-mensaje ', payload);
+        });
 
     </script>
 </body>

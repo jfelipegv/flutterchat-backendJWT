@@ -9,10 +9,12 @@ const app = express();
 //Node Server
 const server = require('http').createServer(app);
 module.exports.io = require('socket.io')(server);
+const cors = require('cors');
+app.use(cors());
 require('./sockets/socket');
 
 
-
+const{PORT} = process.env
 
 //path público
 const publicPath = path.resolve(__dirname, 'public');
