@@ -22,10 +22,7 @@
             console.log('escuchado ', payload);
         });
 
-        socket.on('active-bands', function(bands){
-            console.table(bands)
-        });
-
+       
         socket.emit('emitir-mensaje', (payload)=>{
             console.log('emitiendo-mensaje ', payload);
         });
