@@ -4,7 +4,6 @@ const bcrypt = require('bcryptjs');
 const { generarJWT } = require('../helpers/jwt');
 
 const crearUsuario = async (req, res = response ) => {
-
     const { email, password } = req.body;
 
     try {
@@ -16,15 +15,7 @@ const crearUsuario = async (req, res = response ) => {
             });
         }
 
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            ok: false,
-            msg: 'Hable con el administrador'
-        });
-    }
-
-    const usuario = new Usuario( req.body);
+        const usuario = new Usuario( req.body);
 
     // Encriptar contraseña
     const salt = bcrypt.genSaltSync();
@@ -41,12 +32,20 @@ const crearUsuario = async (req, res = response ) => {
         usuario,
         token
     });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+
+    
 }
 
 const login = async (req, res = response)=> {
     const { email, password } = req.body;
-
-
     try {
         const usuarioDB = await Usuario.findOne({ email });
         if( !usuarioDB ){

@@ -3,30 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SocketServer</title>
 </head>
 <body>
     <h1>Acceso denegado</h1>
+
     <script src="socket.io/socket.io.js"></script>
+
     <script>
         var socket = io();
-        socket.on('connect', function(){
+
+        socket.on('connect', function() {
             console.log('Conectado al servidor')
         });
+
         socket.on('disconnect', function() {
-            console.log('Desconectado')
+            console.log('Perdimos comunicación con el servidor');
         });
 
-        socket.emit('mensaje', { nombre: 'Fernando', id: '123456'});
-        socket.on('mensaje', (payload)=>{
-            console.log('escuchado ', payload);
+
+        socket.emit('mensaje', { nombre: 'Felipe' } );
+
+        socket.on('mensaje', function( payload ){
+            console.log('Escuhando:', payload );
         });
 
-       
-        socket.emit('emitir-mensaje', (payload)=>{
-            console.log('emitiendo-mensaje ', payload);
-        });
 
     </script>
+
 </body>
 </html>
